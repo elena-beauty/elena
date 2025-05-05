@@ -248,17 +248,17 @@
         <div class="row justify-content-center bg-appointment mx-0">
             <div class="col-lg-6 py-5">
                 <div class="p-5 my-5" style="background: rgba(33, 30, 28, 0.7);">
-                    <h1 class="text-white text-center mb-4">Make Appointment</h1>
-                    <form>
+                    <h1 class="text-white text-center mb-4">Đặt lịch</h1>
+                    <form id="appointmentForm">
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent p-4" placeholder="Your Name" required="required" />
+                                    <input type="text" class="form-control bg-transparent p-4" placeholder="Your Name" required id="name"/>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="email" class="form-control bg-transparent p-4" placeholder="Your Email" required="required" />
+                                    <input type="email" class="form-control bg-transparent p-4" placeholder="Your Email" required id="email"/>
                                 </div>
                             </div>
                         </div>
@@ -278,21 +278,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <select class="custom-select bg-transparent px-4" style="height: 47px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 1</option>
-                                        <option value="3">Service 1</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <button class="btn btn-primary btn-block" type="submit" style="height: 47px;">Make Appointment</button>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Book Appointment</button>
                     </form>
                 </div>
             </div>
@@ -632,6 +618,37 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        document.getElementById("appointmentForm").addEventListener("submit", function(e){
+          e.preventDefault();
+        
+          const url = "https://script.google.com/a/macros/smartosc.com/s/AKfycbxVFxPC9P2_FFxBxHMbL-_HVcIa7IjFV-YGmgM5kNq6Z1Fv5ZDxihmZYOUX4DN8pRfN/exec";
+          console.log(99999999, url);
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+              name: document.getElementById("name").value,
+              email: document.getElementById("email").value,
+              date: document.getElementById("dateInput").value,
+              time: document.getElementById("timeInput").value
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then(response => response.json())
+          .then(result => {
+            if(result.result === "success") {
+              alert("Appointment booked!");
+            } else {
+              alert("Something went wrong. Try again!");
+            }
+          })
+          .catch(error => {
+            alert("Failed: " + error);
+          });
+        });
+        </script>
 </body>
 
 </html>
