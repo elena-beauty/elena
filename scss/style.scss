@@ -5,7 +5,7 @@ $secondary: #6EBBF6;
 $light: #FEF1EF;
 $dark: #211E1C;
 
-$font-family-sans-serif: 'Poppins', sans-serif;
+$font-family-sans-serif: 'Roboto', sans-serif;
 
 $body-color: #757575;
 
@@ -16,6 +16,7 @@ $enable-responsive-font-sizes: true;
 $enable-rounded: false;
 
 @import "bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap&subset=vietnamese');
 
 
 /********** Template CSS ************/
